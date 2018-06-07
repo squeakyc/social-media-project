@@ -1,0 +1,26 @@
+<h1>@<%= current_user.username %>'s Tweeter Feed</h1>
+
+<div class="btn">
+  <a href="/tweets/new">New</a>
+</div>
+
+<div class="row">
+  <div class="col-md-3">
+
+  </div>
+
+  <div class="col-md-6">
+    <% @tweets.each do |tweet| %>
+      <%= render tweet %>
+      <!-- <div class="well">
+        <p>@<%= tweet.user.username %></p>
+        <p><%= tweet.message %></p>
+      </div> -->
+    <% end %>
+  </div>
+
+  <div class="col-md-3">
+
+  </div>
+
+</div>
