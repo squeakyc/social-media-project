@@ -23,8 +23,11 @@
                   Hello, <%= current_user.name %>!
                   <ul class="dropdown-menu">
                     <li><a href="/">Home</a></li>
+                    <li><%= link_to "All Users", all_users_path %></li>
+
                     <li role="separator" class="divider"></li>
                     <li><a href="#"><%= link_to 'Log out', destroy_user_session_path, method: :delete %></a></li>
+
                   </ul>
               <% else %>
                 <%= link_to 'Sign in', new_user_session_path %>

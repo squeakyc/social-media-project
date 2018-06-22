@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-md-3">
+    <h3>Showing tweets with tag <%= @tag.phrase %></h3>
+  </div>
+
+  <div class="col-md-6">
+    <% @tag.tweets.each do |tweet| %>
+      <%= render tweet %>
+    <% end %>
+  </div>
+
+  <div class="col-md-3">
+
+  </div>
+
+
+</div>

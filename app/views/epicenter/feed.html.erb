@@ -1,26 +1,45 @@
-<h1>@<%= current_user.username %>'s Tweeter Feed</h1>
-
-<div class="btn">
-  <a href="/tweets/new">New</a>
-</div>
-
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-sm-3 well">
+    <h3><%= link_to current_user.username, show_user_path(id: current_user.id) %></h3>
+    <h4>Stats</h4>
 
+    <div class="">
+      <%= pluralize current_user.tweets.count, "Tweet" %>
+    </div>
+
+    <div class="">
+      Following <%= pluralize current_user.following.count, "User" %>
+    </div>
+
+    <div class="">
+      # of Followers
+      <%= pluralize @followers.count, 'Follower' %>
+
+      <!-- each do loop -->
+    </div>
   </div>
+  <!-- current_user and user_signedin? are devise tools -->
 
-  <div class="col-md-6">
+  <div class="col-sm-6">
+
+    <h1>@<%= current_user.username %>'s Tweeter Feed</h1>
+    <%= render 'tweets/form', tweet: Tweet.new %>
+    <!-- <br> -->
     <% @tweets.each do |tweet| %>
       <%= render tweet %>
-      <!-- <div class="well">
-        <p>@<%= tweet.user.username %></p>
-        <p><%= tweet.message %></p>
-      </div> -->
+
     <% end %>
   </div>
 
-  <div class="col-md-3">
-
+  <div class="col-sm-3">
+    <div class="well">
+      <h4>What's Trending</h4>
+      <% @trending_phrases.each do |phrase, count| %>
+        <% tag = Tag.find_by(phrase: phrase) %>
+<!-- need to finish this -->
+        <%= link_to phrase, tag_tweets_path(id: tag.id) %> - <% pluralize count, "tweet" %>
+      <% end %>
+    </div>
   </div>
 
 </div>

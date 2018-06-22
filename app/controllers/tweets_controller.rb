@@ -1,7 +1,8 @@
 class TweetsController < ApplicationController
+  include TweetsHelper
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
-
   before_action :authenticate_user!, except: [:index, :show]
+  # authenticate_user makes it so that you HAVE to be logged in to use this controller
 
   # GET /tweets
   # GET /tweets.json
@@ -26,11 +27,13 @@ class TweetsController < ApplicationController
   # POST /tweets
   # POST /tweets.json
   def create
-    @tweet = Tweet.new(tweet_params)
+    @tweet = Tweet.create(tweet_params)
+    # slide 7 - change new to create so it will safe the tweet and give it an id
+    get_tagged(@tweet)
 
     respond_to do |format|
       if @tweet.save
-        format.html { redirect_to @tweet, notice: 'Tweet was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Tweet was successfully created.' }
         format.json { render :show, status: :created, location: @tweet }
       else
         format.html { render :new }

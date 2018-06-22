@@ -1,4 +1,12 @@
 <div class="well">
-  <p>@<%= tweet.user.username %></p>
-  <p><%= tweet.message %></p>
+  <p>@<%= link_to tweet.user.username, show_user_path(id: tweet.user_id) %></p>
+  <div class="pull-right">
+    <span class="glyphicon glyphicon-time"></span>
+    <% if tweet.created_at < 1.day.ago %>
+      <%= tweet.created_at.strftime('%b%e') %>
+    <% else %>
+      <%= time_ago_in_words tweet.created_at %> ago
+    <% end %>
+  </div>
+  <p><%= tweet.message.html_safe %></p>
 </div>
